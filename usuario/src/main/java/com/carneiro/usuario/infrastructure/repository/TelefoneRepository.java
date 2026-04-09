@@ -1,6 +1,6 @@
 package com.carneiro.usuario.infrastructure.repository;
 
-import com.projetospg.aprendendospring.infrastructure.entity.Telefone;
+import com.carneiro.usuario.infrastructure.entity.Telefone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
