@@ -1,6 +1,6 @@
 package com.carneiro.usuario.infrastructure.repository;
 
-import com.projetospg.aprendendospring.infrastructure.entity.Endereco;
+import com.carneiro.usuario.infrastructure.entity.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
