@@ -27,7 +27,7 @@ public class Usuario implements UserDetails {
     private String nome;
     @Column(name = "email", length = 100)
     private String email;
-    @Column(name = "senha", length = 18)
+    @Column(name = "senha", length = 100)
     private String senha;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
