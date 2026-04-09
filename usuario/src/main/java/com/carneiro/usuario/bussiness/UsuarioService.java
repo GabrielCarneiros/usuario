@@ -6,6 +6,7 @@ import com.carneiro.usuario.infrastructure.entity.Usuario;
 import com.carneiro.usuario.infrastructure.excepitions.ConfilctException;
 import com.carneiro.usuario.infrastructure.excepitions.ResourceNotFoundException;
 import com.carneiro.usuario.infrastructure.repository.UsuarioRepository;
+import com.carneiro.usuario.infrastructure.security.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final UsuarioConverter usuarioConverter;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public UsuarioDTO salvaUsuario(UsuarioDTO usuarioDTO) {
 
@@ -52,5 +54,16 @@ public class UsuarioService {
     public void deletaUsuarioPorEmail(String email){
         usuarioRepository.deleteByEmail(email);
     }
+
+    public UsuarioDTO atualizarDadosUsuario(String token, UsuarioDTO dto){
+        String email = jwtUtil.extraiEmailToken(token.substring(7));
+        dto.setSenha(dto.getSenha() != null ? passwordEncoder.encode(dto.getSenha()) : null);
+        Usuario usuarioEntity = usuarioRepository.findByEmail(email).orElseThrow(() ->
+                new ResourceNotFoundException("Email não localizado"));
+        Usuario usuario = usuarioConverter.updateUsuario(dto, usuarioEntity);
+
+        return usuarioConverter.paraUsuarioDTO(usuarioRepository.save(usuarioEntity));
+    }
+
 
 }
