@@ -52,6 +52,7 @@ public class UsuarioService {
     }
 
     public void deletaUsuarioPorEmail(String email){
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
         usuarioRepository.deleteByEmail(email);
     }
 

@@ -26,7 +26,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String login(UsuarioDTO usuarioDTO){
+    public String login(@RequestBody UsuarioDTO usuarioDTO){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(usuarioDTO.getEmail(), usuarioDTO.getSenha())
         );
@@ -38,14 +38,14 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
-    @DeleteMapping("email")
+    @DeleteMapping("/{email}")
     public ResponseEntity <Void> deletaUsuarioPorEmail(@PathVariable String email){
         usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestBody UsuarioDTO dto, @RequestHeader ("Autorization") String token){
+    public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestBody UsuarioDTO dto, @RequestHeader ("Authorization") String token){
         return ResponseEntity.ok(usuarioService.atualizarDadosUsuario(token, dto));
     }
 }

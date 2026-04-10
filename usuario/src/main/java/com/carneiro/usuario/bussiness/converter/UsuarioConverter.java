@@ -12,6 +12,7 @@ import java.util.List;
 
 @Component
 public class UsuarioConverter {
+    //“Vou pegar um DTO e transformar em um Usuario”
     public Usuario paraUsuario(UsuarioDTO usuarioDTO){
         return Usuario.builder()
                 .nome(usuarioDTO.getNome())
