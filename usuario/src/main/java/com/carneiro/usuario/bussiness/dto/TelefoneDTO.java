@@ -10,6 +10,7 @@ import lombok.*;
 
 public class TelefoneDTO {
 
+    private Long id;
     private String numeroTelefone;
     private String ddd;
 }
