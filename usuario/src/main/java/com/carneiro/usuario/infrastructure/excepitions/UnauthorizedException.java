@@ -1,8 +1,7 @@
 package com.carneiro.usuario.infrastructure.excepitions;
 
-import javax.naming.AuthenticationException;
 
-public class UnauthorizedException extends AuthenticationException {
+public class UnauthorizedException extends RuntimeException {
     public UnauthorizedException(String message) {
         super(message);
     }
