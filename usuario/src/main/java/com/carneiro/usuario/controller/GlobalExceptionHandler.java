@@ -1,6 +1,7 @@
 package com.carneiro.usuario.controller;
 
 import com.carneiro.usuario.infrastructure.excepitions.ConfilctException;
+import com.carneiro.usuario.infrastructure.excepitions.IllegalArgumentException;
 import com.carneiro.usuario.infrastructure.excepitions.ResourceNotFoundException;
 import com.carneiro.usuario.infrastructure.excepitions.UnauthorizedException;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<String>UnauthorizedException(UnauthorizedException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handlerIllegalArgumentException(IllegalArgumentException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
